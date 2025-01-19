@@ -2,6 +2,9 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
+@app.route('/', methods=['GET'])
+def home():
+    return "Server is working!", 200
 @app.route('/rating', methods=['POST'])
 def calculate_rating():
     data = request.json
