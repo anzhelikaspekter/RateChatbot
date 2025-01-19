@@ -2,15 +2,13 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET'])
-def home():
-    return "Server is working!", 200
-@app.route('/rating', methods=['POST'])
+@app.route('/rating', methods=['GET'])
 def calculate_rating():
-    data = request.json
-    total_rating = int(data.get('total_rating', 0))
-    rating_count = int(data.get('rating_count', 0))
+    # Отримання параметрів з URL
+    total_rating = int(request.args.get('total_rating', 0))
+    rating_count = int(request.args.get('rating_count', 0))
 
+    # Розрахунок середнього рейтингу
     if rating_count > 0:
         average_rating = round(total_rating / rating_count, 2)
     else:
